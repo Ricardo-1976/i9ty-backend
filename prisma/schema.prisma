@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Farm {
+  id               String         @id @default(uuid())
+  cpfCnpj          String         @db.VarChar(14)
+  producerName     String
+  farmName         String
+  city             String
+  state            String  @db.Char(2)
+  totalAreaHa      Float
+  arableAreaHa     Float
+  vegetationAreaHa Float
+  cultures         FarmCulture[]
+
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime?       @updatedAt
+  deletedAt        DateTime?      
+
+}
+
+model Culture {
+  id         Int            @id @default(autoincrement())
+  name       String         @unique
+  farms      FarmCulture[]
+}
+
+model FarmCulture {
+  farmId     String
+  cultureId  Int
+
+  farm       Farm    @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  culture    Culture @relation(fields: [cultureId], references: [id], onDelete: Cascade)
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime? @updatedAt
+  deletedAt  DateTime?
+
+  @@id([farmId, cultureId])
+}
