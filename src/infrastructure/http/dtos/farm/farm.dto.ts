@@ -1,4 +1,5 @@
-import { IsPositive, IsString, IsNotEmpty, IsDate } from 'class-validator';
+import { IsPositive, IsString, IsNotEmpty, IsDate, IsOptional } from 'class-validator';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateFarmDto {
   @IsString()
@@ -68,3 +69,52 @@ export class UpdateFarmDto {
 
   cultureIds?: number[];
 }
+
+export class CultureDto {
+  name: string;
+}
+
+export class FarmResponseDto {
+  id: string;
+
+  cpfCnpj: string;
+
+  producerName: string;
+
+  farmName: string;
+
+  city: string;
+
+  state: string;
+
+  totalAreaHa: number;
+
+  arableAreaHa: number;
+
+  vegetationAreaHa: number;
+
+  cultures: CultureDto[];
+}
+
+export class FindFarmsQueryDto {
+  @IsOptional()
+  @IsString()
+  @ApiPropertyOptional({ description: 'Farm ID' })
+  id?: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiPropertyOptional({ description: 'Producer CPF or CNPJ' })
+  cpfCnpj?: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiPropertyOptional({ description: 'Producer name' })
+  producerName?: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiPropertyOptional({ description: 'Farm name' })
+  farmName?: string;
+}
+

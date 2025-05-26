@@ -1,8 +1,8 @@
-import type { ICultureRepository } from '@/domain/repositories/culture/culture.repository';
+import { ICultureRepository } from '@/domain/repositories/culture/culture.repository';
 import { IFarmRepository } from '@/domain/repositories/farm/farm.repository';
 import { IFarmCultureRepository } from '@/domain/repositories/farmCulture/farm.culture.repository';
 import { CreateFarmDto } from '@/infrastructure/http/dtos/farm/farm.dto';
-import { validateCNPJ, validateCPF } from '@/shared/utils/functions';
+import { isInvalidBrazilianState, validateCNPJ, validateCPF } from '@/shared/utils/functions';
 import { ConflictException, Injectable, Inject } from '@nestjs/common';
 
 @Injectable()
@@ -35,6 +35,12 @@ export class CreateFarmUseCase {
       throw new ConflictException(
         'Invalid request: The sum of arable and vegetation areas cannot exceed the total area.',
       );
+    }
+
+    if (isInvalidBrazilianState(data.state)) {
+      throw new ConflictException(
+        'Invalid request: The provided state is not a valid Brazilian state.',  
+      ); 
     }
 
     const farms = await this.farmRepository.create({

@@ -92,12 +92,4 @@ export class Farm {
   public set updatedAt(updatedAt: Date) {
     this.props.updatedAt = updatedAt;
   }
-
-  public get deletedAt(): Date {
-    return this.props.deletedAt;
-  }
-
-  public set deletedAt(deletedAt: Date) {
-    this.props.deletedAt = deletedAt;
-  }
 }

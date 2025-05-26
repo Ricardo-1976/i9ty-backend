@@ -10,5 +10,4 @@ export interface FarmProps {
   vegetationAreaHa: number;
   createdAt: Date;
   updatedAt: Date;
-  deletedAt: Date;
 }

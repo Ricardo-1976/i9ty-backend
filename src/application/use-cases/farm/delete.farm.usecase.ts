@@ -20,6 +20,6 @@ export class DeleteFarmUseCase {
 
     await this.farmCultureRepository.delete(id);
 
-    return await this.farmRepository.delete(id);
+    await this.farmRepository.delete(id);
   }
 }

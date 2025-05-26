@@ -15,7 +15,6 @@ export class PrismaFarmMapper {
       vegetationAreaHa: farm.vegetationAreaHa,
       createdAt: farm.createdAt,
       updatedAt: farm.updatedAt,
-      deletedAt: farm.deletedAt,
     };
   }
 
@@ -32,7 +31,6 @@ export class PrismaFarmMapper {
       vegetationAreaHa: raw.vegetationAreaHa,
       createdAt: raw.createdAt,
       updatedAt: raw.updatedAt ?? new Date(),
-      deletedAt: raw.deletedAt ?? new Date(),
     },
 );
   }

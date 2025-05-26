@@ -2,16 +2,13 @@ import type { IFarmRepository } from '@/domain/repositories/farm/farm.repository
 import { Inject, Injectable } from '@nestjs/common';
 
 @Injectable()
-export class GetTotalFarmsUseCase {
+export class GetFarmIndicatorsUseCase {
   constructor(
     @Inject('IFarmRepository')
     private readonly farmRepository: IFarmRepository,
   ) {}
 
   async execute() {
-    const totalFarms = await this.farmRepository.countTotalFarms();
-    return {
-      totalFarms,
-    };
+    return await this.farmRepository.getFarmIndicators();
   }
 }

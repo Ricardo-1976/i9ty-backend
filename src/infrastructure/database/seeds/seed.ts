@@ -13,3 +13,4 @@ main()
     console.log('Erro ao executar o seed:', e);
     process.exit(1);
   });
+  

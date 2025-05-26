@@ -17,12 +17,11 @@ export class PrismaFarmCultureRepository implements IFarmCultureRepository {
       data: farmCultureData,
     });
   }
-  
+
   async findByFarmId(farmId: string): Promise<FarmCulture | null> {
     const raw = await this.prisma.farmCulture.findFirst({
       where: {
         farmId,
-        deletedAt: null,
       },
     });
 
@@ -31,27 +30,19 @@ export class PrismaFarmCultureRepository implements IFarmCultureRepository {
   }
 
   async delete(farmId: string): Promise<void> {
-    await this.prisma.farmCulture.updateMany({
-      data: {
-        deletedAt: new Date(),
-      },
+    await this.prisma.farmCulture.deleteMany({
       where: {
         farmId,
-        deletedAt: null,
       },
     });
   }
 
   async listCropIndicatorsByState(): Promise<{ state: string; crop: string; farmCount: number }[]> {
     const records = await this.prisma.farmCulture.findMany({
-      where: {
-        farm: {
-          deletedAt: null,
-        },
-      },
       include: {
         farm: {
           select: {
+            id: true,     
             state: true,
           },
         },
@@ -63,22 +54,29 @@ export class PrismaFarmCultureRepository implements IFarmCultureRepository {
       },
     });
   
-    // Agrupar manualmente os resultados
     const grouped: Record<string, { state: string; crop: string; farmCount: number }> = {};
+    const uniqueFarms = new Set<string>();
   
     for (const item of records) {
-      const key = `${item.farm.state}_${item.culture.name}`;
-      if (!grouped[key]) {
-        grouped[key] = {
-          state: item.farm.state,
-          crop: item.culture.name,
-          farmCount: 0,
-        };
+      const uniqueKey = `${item.farm.state}_${item.culture.name}_${item.farm.id}`;
+      const groupKey = `${item.farm.state}_${item.culture.name}`;
+  
+      if (!uniqueFarms.has(uniqueKey)) {
+        uniqueFarms.add(uniqueKey);
+  
+        if (!grouped[groupKey]) {
+          grouped[groupKey] = {
+            state: item.farm.state,
+            crop: item.culture.name,
+            farmCount: 0,
+          };
+        }
+  
+        grouped[groupKey].farmCount++;
       }
-      grouped[key].farmCount++;
     }
   
     return Object.values(grouped);
   }
-
+  
 }
