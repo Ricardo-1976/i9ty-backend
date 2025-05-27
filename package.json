@@ -17,12 +17,13 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "jest --config ./jest-e2e.json",
     "seed": "ts-node src/infrastructure/database/seeds/seed.ts",
     "prisma:generate": "prisma generate"
   },
   "dependencies": {
     "@nestjs/common": "^11.1.1",
+    "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.1.1",
     "@nestjs/platform-express": "^11.1.1",
     "@nestjs/swagger": "^11.2.0",
@@ -47,6 +48,7 @@
     "@types/jest": "^29.5.14",
     "@types/node": "^22.15.21",
     "@types/supertest": "^6.0.3",
+    "cross-env": "^7.0.3",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.0",

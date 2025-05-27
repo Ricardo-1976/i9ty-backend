@@ -3,7 +3,7 @@ import { PrismaModule } from './infrastructure/database/prisma.module';
 import { FarmModule } from './application/farm.module';
 
 @Module({
-  imports: [PrismaModule, FarmModule],
+  imports: [PrismaModule, FarmModule,],
   controllers: [],
   providers: [],
 })

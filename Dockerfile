@@ -10,10 +10,8 @@ RUN npm install
 
 COPY . .
 
-# Gera o prisma client
 RUN npx prisma generate
 
-# Compila o projeto e cria a pasta dist
 RUN npm run build
 
 CMD ["npm", "run", "start:prod"]

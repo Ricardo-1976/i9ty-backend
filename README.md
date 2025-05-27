@@ -86,7 +86,7 @@ docker-compose up
 Ou, para garantir que a imagem seja reconstruída:
 
 ```bash
-docker-compose up --build
+docker-compose up -d --build
 ```
 
 ### 🔍 O que esse comando faz:
@@ -101,7 +101,7 @@ docker-compose up --build
 
 #### Migrações para criar o banco de dados:
 ```bash
-npx prisma migrate dev --name init
+npx prisma migrate dev
 ```
 
 #### Para produção (ex: Docker):
