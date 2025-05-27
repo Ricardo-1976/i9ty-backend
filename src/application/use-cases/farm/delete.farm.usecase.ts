@@ -1,6 +1,6 @@
 import { IFarmRepository } from "@/domain/repositories/farm/farm.repository";
 import { IFarmCultureRepository } from "@/domain/repositories/farmCulture/farm.culture.repository";
-import { ConflictException, Injectable, Inject } from "@nestjs/common";
+import { Injectable, Inject, NotFoundException } from "@nestjs/common";
 
 @Injectable()
 export class DeleteFarmUseCase {
@@ -15,7 +15,7 @@ export class DeleteFarmUseCase {
     const farm = await this.farmRepository.findById(id);
 
     if (!farm) {
-      throw new ConflictException('Farm does not exists!');
+      throw new NotFoundException('Farm does not exists!');
     }
 
     await this.farmCultureRepository.delete(id);

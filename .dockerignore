@@ -1,0 +1,22 @@
+# Ignorar dependências locais
+node_modules
+dist
+coverage
+
+# Ignorar arquivos de controle de versão e configs locais
+.git
+.gitignore
+Dockerfile
+.dockerignore
+.env
+.env.local
+.env.*.local
+
+# Ignorar logs e sistemas operacionais
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+*.log
+*.swp
+.DS_Store
+Thumbs.db

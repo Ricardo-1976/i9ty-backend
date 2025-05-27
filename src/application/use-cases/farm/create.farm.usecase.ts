@@ -3,7 +3,7 @@ import { IFarmRepository } from '@/domain/repositories/farm/farm.repository';
 import { IFarmCultureRepository } from '@/domain/repositories/farmCulture/farm.culture.repository';
 import { CreateFarmDto } from '@/infrastructure/http/dtos/farm/farm.dto';
 import { isInvalidBrazilianState, validateCNPJ, validateCPF } from '@/shared/utils/functions';
-import { ConflictException, Injectable, Inject } from '@nestjs/common';
+import { ConflictException, Injectable, Inject, BadRequestException, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class CreateFarmUseCase {
@@ -26,19 +26,19 @@ export class CreateFarmUseCase {
     const isValidCpfCnpj = validateCPF(data.cpfCnpj) || validateCNPJ(data.cpfCnpj);
 
     if (!isValidCpfCnpj) {
-      throw new ConflictException(
+      throw new BadRequestException(
         'Invalid request: The provided CPF or CNPJ is invalid.',
       );
     }
 
     if (data.arableAreaHa + data.vegetationAreaHa > data.totalAreaHa) {
-      throw new ConflictException(
+      throw new BadRequestException(
         'Invalid request: The sum of arable and vegetation areas cannot exceed the total area.',
       );
     }
 
     if (isInvalidBrazilianState(data.state)) {
-      throw new ConflictException(
+      throw new BadRequestException(
         'Invalid request: The provided state is not a valid Brazilian state.',  
       ); 
     }
@@ -59,7 +59,7 @@ export class CreateFarmUseCase {
     for (const cultureId of data.cultureIds ?? []) {
       const culture = await this.cultureRepository.findById(cultureId);
       if (!culture) {
-      throw new ConflictException(
+      throw new NotFoundException(
         `Invalid request: Culture with ID ${cultureId} does not exist.`,
       );
       }

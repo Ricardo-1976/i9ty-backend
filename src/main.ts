@@ -8,12 +8,19 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
 
-  // Global prefix para todas as rotas (exemplo: /api)
-  app.setGlobalPrefix('api/v1');
+  app.enableCors({
+    origin: process.env.CORS_ORIGIN || '*',
+    methods: 'GET,PUT,POST,DELETE',
+    allowedHeaders: 'Content-Type, Accept',
+  });
+
+  app.setGlobalPrefix('api');
 
   const config = new DocumentBuilder()
-    .setTitle('API')
-    .setDescription('Documentação da API com Swagger')
+    .setTitle('Farm Registration')
+    .setDescription(
+      'API for registering and managing farms and rural producers.',
+    )
     .setVersion('1.0')
     .build();
 
@@ -23,8 +30,9 @@ async function bootstrap() {
   const port = process.env.PORT ? +process.env.PORT : 3000;
   await app.listen(port);
 
-  logger.log(`API rodando em http://localhost:${port}/api`);
-  logger.log(`Swagger disponível em http://localhost:${port}/docs`);
+  const baseUrl = process.env.HOST || 'http://localhost';
+  logger.log(`Application is running on: ${baseUrl}:${port}/api`);
+  logger.log(`Swagger documentation is available at: ${baseUrl}:${port}/docs`);
 }
 
 void bootstrap();

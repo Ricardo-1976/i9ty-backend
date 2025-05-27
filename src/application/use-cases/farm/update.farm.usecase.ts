@@ -7,6 +7,8 @@ import {
   ConflictException,
   Injectable,
   Inject,
+  NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 
 @Injectable()
@@ -25,26 +27,26 @@ export class UpdateFarmUseCase {
   async execute(id: string, data: UpdateFarmDto) {
     const farm = await this.farmRepository.findById(id);
     if (!farm) {
-      throw new ConflictException('Farm does not exist!');
+      throw new NotFoundException('Farm does not exist!');
     }
 
     const isValidCpfCnpj =
       validateCPF(data.cpfCnpj) || validateCNPJ(data.cpfCnpj);
     if (!isValidCpfCnpj) {
-      throw new ConflictException('Invalid CPF or CNPJ.');
+      throw new BadRequestException('Invalid CPF or CNPJ.');
     }
 
     if (
       data.arableAreaHa + data.vegetationAreaHa >
       data.totalAreaHa
     ) {
-      throw new ConflictException(
+      throw new BadRequestException(
         'Invalid request: The sum of arable and vegetation areas cannot exceed the total area.',
       );
     }
 
     if (isInvalidBrazilianState(data.state)) {
-          throw new ConflictException(
+          throw new BadRequestException(
             'Invalid request: The provided state is not a valid Brazilian state.',  
           ); 
         }
@@ -62,7 +64,7 @@ export class UpdateFarmUseCase {
       for (const cultureId of data.cultureIds) {
         const culture = await this.cultureRepository.findById(cultureId);
         if (!culture) {
-          throw new ConflictException(
+          throw new NotFoundException(
             `Invalid request: Culture with ID ${cultureId} does not exist.`,
           );
         }
