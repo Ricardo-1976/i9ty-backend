@@ -1,13 +1,13 @@
 import { Body, Controller,Delete,Get,Param,Post, Put, Query, } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CreateFarmDto, UpdateFarmDto, FindFarmsQueryDto } from '../../dtos/farm/farm.dto';
-import { CreateFarmUseCase } from '@/application/use-cases/farm/create.farm.usecase';
-import { UpdateFarmUseCase } from '@/application/use-cases/farm/update.farm.usecase';
-import { DeleteFarmUseCase } from '@/application/use-cases/farm/delete.farm.usecase';
-import { GetFarmIndicatorsUseCase } from '@/application/use-cases/farm/get.farm.indicators.usecase';
-import { GetCropByStateUseCase } from '@/application/use-cases/farm/get.crop.by.state.useCase';
-import { GetFarmUseCase } from '@/application/use-cases/farm/get.farm.usecase';
-import { SwaggerCreateFarmResponses, SwaggerFarmResponses, SwaggerUpdateFarmResponses } from '@/shared/utils/swagger-responses';
+import { CreateFarmUseCase } from '../../../../application/use-cases/farm/create.farm.usecase';
+import { UpdateFarmUseCase } from '../../../../application/use-cases/farm/update.farm.usecase';
+import { DeleteFarmUseCase } from '../../../../application/use-cases/farm/delete.farm.usecase';
+import { GetFarmIndicatorsUseCase } from '../../../../application/use-cases/farm/get.farm.indicators.usecase';
+import { GetCropByStateUseCase } from '../../../../application/use-cases/farm/get.crop.by.state.useCase';
+import { GetFarmUseCase } from '../../../../application/use-cases/farm/get.farm.usecase';
+import { SwaggerCreateFarmResponses, SwaggerFarmResponses, SwaggerUpdateFarmResponses } from '../../../../shared/utils/swagger-responses';
 
 @ApiTags('Farm')
 @Controller('/v1/farm')
@@ -36,12 +36,6 @@ export class FarmController {
     return await this.updateFarmUseCase.execute(id, data);
   }
 
-  @Delete('/delete/:id')
-  @SwaggerFarmResponses()
-  async delete(@Param('id') id: string) {
-    await this.deleteFarmUseCase.execute(id);
-  }
-
   @Get('/indicators-farms')
   @SwaggerFarmResponses()
   async getFarmIndicators() {
@@ -59,5 +53,11 @@ export class FarmController {
   @ApiBody({ type: FindFarmsQueryDto })
   async findFarms(@Query() filters: FindFarmsQueryDto) {
     return await this.getFarmUseCase.execute(filters);
+  }
+
+  @Delete('/delete/:id')
+  @SwaggerFarmResponses()
+  async delete(@Param('id') id: string) {
+    await this.deleteFarmUseCase.execute(id);
   }
 }

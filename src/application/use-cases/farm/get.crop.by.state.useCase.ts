@@ -1,4 +1,4 @@
-import { IFarmCultureRepository } from '@/domain/repositories/farmCulture/farm.culture.repository';
+import { IFarmCultureRepository } from '../../../domain/repositories/farmCulture/farm.culture.repository';
 import { Injectable, Inject } from '@nestjs/common';
 
 @Injectable()

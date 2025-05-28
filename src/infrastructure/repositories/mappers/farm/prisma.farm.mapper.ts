@@ -1,5 +1,5 @@
 import { Farm as RawFarm } from '@prisma/client';
-import { Farm } from '@/domain/entities/farm/farm';
+import { Farm } from '../../../../domain/entities/farm/farm';
 
 export class PrismaFarmMapper {
   static toPrisma(farm: Farm): RawFarm {

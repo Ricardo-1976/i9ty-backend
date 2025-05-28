@@ -2,6 +2,9 @@ import { IsPositive, IsString, IsNotEmpty, IsDate, IsOptional } from 'class-vali
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateFarmDto {
+  
+  id?: string;
+
   @ApiProperty({ description: 'CPF or CNPJ of the producer' })
   @IsString()
   @IsNotEmpty({ message: 'CPF/CNPJ is required.' })
@@ -80,10 +83,6 @@ export class UpdateFarmDto {
   @ApiProperty({ description: 'Vegetation area of the farm in hectares' })
   @IsPositive({ message: 'Vegetation area must be greater than zero.' })
   vegetationAreaHa: number;
-
-  @ApiProperty({ description: 'Date when the farm was last updated' })
-  @IsDate({ message: 'Updated at must be a valid date.' })
-  updatedAt: Date;
 
   @ApiPropertyOptional({ description: 'List of culture IDs associated with the farm', type: [Number] })
   cultureIds?: number[];

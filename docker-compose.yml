@@ -25,6 +25,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - .:/home/node/app
     working_dir: /home/node/app
     environment:
       DATABASE_URL: "postgresql://postgres:postgres@db:5432/nestjs_db"

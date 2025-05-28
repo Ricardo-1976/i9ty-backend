@@ -1,5 +1,5 @@
-import { IFarmRepository } from "@/domain/repositories/farm/farm.repository";
-import { IFarmCultureRepository } from "@/domain/repositories/farmCulture/farm.culture.repository";
+import { IFarmRepository } from "../../../domain/repositories/farm/farm.repository";
+import { IFarmCultureRepository } from "../../../domain/repositories/farmCulture/farm.culture.repository";
 import { Injectable, Inject, NotFoundException } from "@nestjs/common";
 
 @Injectable()

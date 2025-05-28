@@ -1,5 +1,5 @@
-import { FarmCultureProps } from '@/domain/interface/farmCulture/farm.culture.interface';
-import { Replace } from '@/helpers/Replace';
+import { FarmCultureProps } from '../../../domain/interface/farmCulture/farm.culture.interface';
+import { Replace } from '../../../helpers/Replace';
 
 export class FarmCulture {
     private readonly props: FarmCultureProps;

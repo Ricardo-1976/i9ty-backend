@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { IFarmRepository } from '@/domain/repositories/farm/farm.repository';
-import { PrismaService } from '@/infrastructure/database/prisma.service';
+import { IFarmRepository } from '../../../../domain/repositories/farm/farm.repository';
+import { PrismaService } from '../../../../infrastructure/database/prisma.service';
 import { PrismaFarmMapper } from '../../mappers/farm/prisma.farm.mapper';
-import { Farm } from '@/domain/entities/farm/farm';
-import { FarmResponseDto, type FindFarmsQueryDto } from '@/infrastructure/http/dtos/farm/farm.dto';
+import { Farm } from '../../../../domain/entities/farm/farm';
+import { FarmResponseDto, type FindFarmsQueryDto } from '../../../../infrastructure/http/dtos/farm/farm.dto';
 
 @Injectable()
 export class PrismaFarmRepository implements IFarmRepository {
