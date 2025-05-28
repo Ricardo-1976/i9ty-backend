@@ -25,114 +25,53 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Project setup
+## Executando o Projeto com Docker
 
+Siga os passos abaixo para compilar, executar e gerenciar o projeto utilizando Docker:
+
+### 1. Construir a Imagem do Container
+Para construir a imagem do container, execute:
 ```bash
-$ npm install
+docker compose build
 ```
 
-## Compile and run the project
-
+### 2. Migrar e Popular o Banco de Dados
+Execute o seguinte comando para aplicar as migrações e popular o banco de dados:
 ```bash
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run build  
-
-# development
-$ npm run start
+docker compose -f docker-compose.yml -f docker-compose.migrate.seed.yml up
 ```
 
-## 🚀 Executando o Projeto com Docker
-
-### ✅ Rodando em Produção (sem sobrescrever `dist`, sem hot reload)
-
-Use o seguinte comando:
-
+### 3. Executar Testes End-to-End (E2E)
+Para executar os testes end-to-end, utilize:
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+docker compose -f docker-compose.yml -f docker-compose.test.yml up
 ```
 
-Execute o comando para rodando o app:
+### 4. Executar o Projeto em Produção
+Você pode iniciar o projeto em modo de produção utilizando o comando abaixo:
 
-```bash
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up
-```
+- Com uma configuração específica para produção:
+  ```bash
+  docker compose -f docker-compose.yml -f docker-compose.prod.yml up
+  ```
+### 5. Executar o Projeto na dev
+Você pode iniciar o projeto em modo de produção utilizando o comando abaixo:
 
-### 🔍 O que esse comando faz:
-- Usa o `docker-compose.yml` como base (serviços, imagem, portas, banco de dados, etc.).
-- Adiciona as configurações do `docker-compose.prod.yml` para:
-  - **Não montar volumes** (`volumes: []`) → Não apaga o diretório `dist`.
-  - Usar o comando `start:prod`, que executa o `dist/main.js`.
-- O parâmetro `--build` garante que a imagem seja gerada com o código mais recente e o build atualizado.
-- O parâmetro `-d` executa os containers em modo daemon (segundo plano).
+- Utilizando a configuração padrão para ambiente de desenvolvimento:
+  ```bash
+  docker compose up
+  ```
+  ```
 
-### ✅ Para parar os containers:
-```bash
-docker compose -f docker-compose.yml -f docker-compose.prod.yml down
-```
+### 6. Parar e Remover os Containers
+Para interromper e remover todos os containers, incluindo seus volumes, utilize os comandos abaixo:
 
----
+- Para parar e remover os containers:
+  ```bash
+  docker compose down
+  ```
 
-### ✅ Rodando em Desenvolvimento (com hot reload e volumes montados)
-
-Execute o comando:
-
-```bash
-docker-compose up
-```
-
-Ou, para garantir que a imagem seja reconstruída:
-
-```bash
-docker-compose up -d --build
-```
-
-### 🔍 O que esse comando faz:
-- Sobe o container `postgres_db`.
-- Sobe o container `backend_app` com:
-  - O volume `.:/home/node/app`, refletindo o código local dentro do container.
-  - O comando `npm run start:dev`, que utiliza `nest start --watch` para hot reload.
-
----
-
-### ✅ Configuração do Prisma
-
-#### Migrações para criar o banco de dados:
-```bash
-npx prisma migrate dev
-```
-
-#### Para produção (ex: Docker):
-```bash
-npx prisma migrate deploy
-```
-
-#### Para executar as seeds:
-```bash
-npm run seed
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- Para parar e remover os containers junto com seus volumes:
+  ```bash
+  docker compose down -v
+  ```
