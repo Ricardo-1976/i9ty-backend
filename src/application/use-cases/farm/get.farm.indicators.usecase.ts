@@ -1,4 +1,4 @@
-import type { IFarmRepository } from '@/domain/repositories/farm/farm.repository';
+import type { IFarmRepository } from '../../../domain/repositories/farm/farm.repository';
 import { Inject, Injectable } from '@nestjs/common';
 
 @Injectable()

@@ -1,5 +1,5 @@
-import { IFarmCultureRepository } from "@/domain/repositories/farmCulture/farm.culture.repository";
-import { PrismaService } from "@/infrastructure/database/prisma.service";
+import { IFarmCultureRepository } from "../../../../domain/repositories/farmCulture/farm.culture.repository";
+import { PrismaService } from "../../../../infrastructure/database/prisma.service";
 import { Injectable } from "@nestjs/common";
 import { FarmCulture } from "@prisma/client";
 

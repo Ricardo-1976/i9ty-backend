@@ -1,5 +1,5 @@
-import type { ICultureRepository } from "@/domain/repositories/culture/culture.repository";
-import { PrismaService } from "@/infrastructure/database/prisma.service";
+import type { ICultureRepository } from "../../../../domain/repositories/culture/culture.repository";
+import { PrismaService } from "../../../../infrastructure/database/prisma.service";
 import { Injectable } from "@nestjs/common";
 import { Culture } from "@prisma/client";
 

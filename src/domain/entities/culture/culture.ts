@@ -1,4 +1,4 @@
-import type { CultureProps } from "@/domain/interface/culture/culture.interface";
+import type { CultureProps } from "../../../domain/interface/culture/culture.interface";
 
 export class Culture {
   private props: CultureProps

@@ -1,8 +1,8 @@
-import { ICultureRepository } from '@/domain/repositories/culture/culture.repository';
-import { IFarmRepository } from '@/domain/repositories/farm/farm.repository';
-import { IFarmCultureRepository } from '@/domain/repositories/farmCulture/farm.culture.repository';
-import { UpdateFarmDto } from '@/infrastructure/http/dtos/farm/farm.dto';
-import { isInvalidBrazilianState, validateCNPJ, validateCPF } from '@/shared/utils/functions';
+import { ICultureRepository } from '../../../domain/repositories/culture/culture.repository';
+import { IFarmRepository } from '../../../domain/repositories/farm/farm.repository';
+import { IFarmCultureRepository } from '../../../domain/repositories/farmCulture/farm.culture.repository';
+import { UpdateFarmDto } from '../../../infrastructure/http/dtos/farm/farm.dto';
+import { isInvalidBrazilianState, validateCNPJ, validateCPF } from '../../../shared/utils/functions';
 import {
   ConflictException,
   Injectable,

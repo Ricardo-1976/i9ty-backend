@@ -1,5 +1,5 @@
-import type { IFarmRepository } from '@/domain/repositories/farm/farm.repository';
-import  { FindFarmsQueryDto } from '@/infrastructure/http/dtos/farm/farm.dto';
+import type { IFarmRepository } from '../../../domain/repositories/farm/farm.repository';
+import  { FindFarmsQueryDto } from '../../../infrastructure/http/dtos/farm/farm.dto';
 import { Inject, Injectable } from '@nestjs/common';
 
 @Injectable()

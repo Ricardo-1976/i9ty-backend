@@ -1,5 +1,5 @@
-import type { FarmProps } from "@/domain/interface/farm/farm.interface";
-import type { Replace } from "@/helpers/Replace";
+import type { FarmProps } from "../../../domain/interface/farm/farm.interface";
+import type { Replace } from "../../../helpers/Replace";
 
 export class Farm {
   private props: FarmProps;
