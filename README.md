@@ -35,8 +35,8 @@ Para construir a imagem do container, execute:
 docker compose build
 ```
 
-### 2. Migrar e Popular o Banco de Dados
-Execute o seguinte comando para aplicar as migrações e popular o banco de dados:
+### 2. Migrar e Seeds ao Banco de Dados
+Execute o seguinte comando para aplicar as migrações e seeds o banco de dados:
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.migrate.seed.yml up
 ```
@@ -60,7 +60,6 @@ Você pode iniciar o projeto em modo de produção utilizando o comando abaixo:
 - Utilizando a configuração padrão para ambiente de desenvolvimento:
   ```bash
   docker compose up
-  ```
   ```
 
 ### 6. Parar e Remover os Containers
